@@ -65,29 +65,24 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   bool _showChart = false;
-  final List<Transaction> _transactionsDay = [];
+
   final List<Transaction> _transactions = [
     // list  de despesas
 
     Transaction(
       id: 't1',
       title: 'Conta de Internet',
-      value: 51.00,
-      date: DateTime.now().subtract(Duration(days: 2)),
+      value: 10.00,
+      date: DateTime.now().subtract(Duration(days: 1)),
     ),
     Transaction(
       id: 't2',
       title: 'Conta de Luz',
-      value: 21.35,
+      value: 11.35,
       date: DateTime.now().subtract(Duration(days: 2)),
     ),
-    Transaction(
-      id: 't3',
-      title: 'Lanche Facudade',
-      value: 10.35,
-      date: DateTime.now(),
-    ),
   ];
+
   List<Transaction> get _recentTransactions {
     return _transactions.where((tr) {
       return tr.date.isAfter(DateTime.now().subtract(
@@ -96,11 +91,9 @@ class _MyHomePageState extends State<MyHomePage> {
     }).toList();
   }
 
-  List<Transaction> get _transactionsDay2 {
+  List<Transaction> get _despDia {
     return _transactions.where((tr) {
-      return tr.date.isAfter(DateTime.now().subtract(
-        Duration(days: 1),
-      ));
+      return tr.date.isAfter(DateTime.now());
     }).toList();
   }
 
@@ -114,9 +107,9 @@ class _MyHomePageState extends State<MyHomePage> {
 
     setState(() {
       _transactions.add(newTransaction);
-      _transactionsDay2.add(newTransaction);
+      //_transactionsDay.add(newTransaction);
     });
-    print(_transactionsDay2);
+    // print(_transactionsDay.toString());
     Navigator.of(context).pop();
   }
 
@@ -177,7 +170,9 @@ class _MyHomePageState extends State<MyHomePage> {
             if (_showChart || !isLandscape)
               Container(
                 height: availableHeight * (isLandscape ? 0.7 : 0.30),
-                child: Chart(_recentTransactions, _transactionsDay2),
+                child: Chart(
+                  _recentTransactions,
+                ),
               ),
             if (!_showChart || !isLandscape)
               Container(

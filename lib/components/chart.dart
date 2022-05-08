@@ -5,10 +5,9 @@ import 'chart_bar.dart';
 
 class Chart extends StatelessWidget {
   final List<Transaction> recentTransaction;
-  final List<Transaction> transactionDay;
 
   // ignore: prefer_const_constructors_in_immutables
-  Chart(this.recentTransaction, this.transactionDay);
+  Chart(this.recentTransaction);
 
   List<Map<String, Object>> get groupedTransactions {
     return List.generate(7, (index) {
@@ -16,7 +15,7 @@ class Chart extends StatelessWidget {
         Duration(days: index),
       );
       var day = DateFormat.E('PT_BR').format(weekDay)[0].toUpperCase();
-      var day2 = DateFormat.E('PT_BR').format(weekDay).toUpperCase();
+      //var day2 = DateFormat.E('PT_BR').format(weekDay).toUpperCase();
       double totalSum = 0.00;
 
       // for (var trans in recentTransaction) {
@@ -31,7 +30,7 @@ class Chart extends StatelessWidget {
 
       return {
         'day': day,
-        'day2': day2,
+        // 'day2': day2,
         'value': totalSum,
       };
     }).reversed.toList();
@@ -61,10 +60,8 @@ class Chart extends StatelessWidget {
               fit: FlexFit.tight,
               child: ChartBar(
                 label: tr['day'].toString(),
-                title: tr['title'].toString(),
                 value: (tr['value'] as double),
                 percentage: _weekTotalValue == 0 ? 0 : valor / _weekTotalValue,
-                date: tr['day2'].toString(),
               ),
             );
           }).toList(),

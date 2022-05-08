@@ -1,5 +1,7 @@
 // ignore_for_file: avoid_print
 
+import 'dart:math';
+
 import 'package:expenses/components/transaction_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -7,17 +9,15 @@ import '../models/tansaction.dart';
 
 class ChartBar extends StatefulWidget {
   final String label;
-  final String title;
   final double value;
   final double percentage;
-  final String date;
+  // final List<Transaction> tansactionDay;
 
   ChartBar({
     required this.label,
-    required this.title,
     required this.value,
     required this.percentage,
-    required this.date,
+    //required this.tansactionDay,
   });
 
   @override
@@ -58,13 +58,14 @@ class _ChartBarState extends State<ChartBar> {
                     heightFactor: widget.percentage,
                     child: InkWell(
                       onTap: () {
-                        print(
-                            'Mostrar Lista de transações de ${widget.date} ${widget.value}');
+                        print('transações do dia');
                       },
                       child: Container(
                         //child: Text(percentage.toString()),
+
                         decoration: BoxDecoration(
                             color: Theme.of(context).colorScheme.primary,
+                            //color: _backgroundColor,
                             borderRadius: BorderRadius.circular(4)),
                       ),
                     ),
